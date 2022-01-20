@@ -1,0 +1,13 @@
+
+insert into books(isbn,title,authors,publisher) values ('0618260307','The Hobbit','J. R. R. Tolkien','Houghton Mifflin'),('0908606664','Slinky Malinki','Lynley Dodd','McGraw-Hill'),('1908606206','Hairy Maclary from Donaldsons Dairy','Lynley Dodd','Mallinson Rendel'),('0393310728','How to Lie with Statistics','Darrell Huff','W. W. Norton'),('0908783116','Mechanical Harry','Bob Kerr','McGraw-Hill'),('0908606273','My Cat Likes to Hide in Boxes','Lynley Dodd','McGraw-Hill'),('0908606251','The Mystery','Eve Sutton','McGraw-Hill');
+
+
+insert into loan(emp_no,isbn,date) values (1,'0618260307','22-07-2020'),(2,'0908606664','12-09-2020'),(4,'1908606206','31-10-2021'),(3,'0393310728','31-08-2019'),(5,'0908606251','01-02-2020'),(6,'0908783116','21-08-2021');
+
+
+select e.name,b.publisher from employee e, books b, loan l where e.emp_no = l.emp_no and l.isbn = b.isbn and b.publisher = 'McGraw-Hill';
+
+select e.name from employee e join loan l on e.emp_no=l.emp_no join (select isbn from books where publisher = 'McGraw_Hill') x on l.isbn=x.isbn group by e.emp_no,name having count(*)= (select count(*) from books where publisher='McGraw-Hill')
+
+
+select name from employee e,loan l,books b where e.emp_no=l.emp_no and b.isbn=l.isbn  group by e.emp_no, name,b.publisher having count(l.isbn) >=5;
