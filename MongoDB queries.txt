@@ -1,0 +1,99 @@
+MangoDb Commands Database
+
+#Show all the database
+
+>show dbs
+#create database;
+
+use <database_name>
+
+#switchs to new database
+
+>use <database_name>
+
+#Delete the database
+
+>db.dropDatabase();
+
+#list out the current db
+
+>db
+
+#Collections Commands
+
+#to show all the collections
+>show collections
+
+#to drop a collection
+>db.<collection_name>.drop();
+
+#to create to collections
+>db.createCollection('dept');
+
+
+#Mongo Db Commands Rows
+
+#show all the row in collections
+>db.<collection_name>.find()
+
+#insert single row
+
+>db.<collection_name>.insert({});
+
+db.employee.insert(
+{
+"name": "ramesh",
+"dept":"Account",
+"salary":5000
+});
+
+#insert multiple rows
+>db.<collection_name>.insertMany([{},{},{}])
+
+db.employee.insertMany([
+{
+"name": "c",
+"dept":"c",
+"salary":2000
+},
+{
+"name": "python",
+"dept":"python",
+"salary":1000
+}
+]);
+
+#Show all Rows in a Collection (Prettified)
+
+>db.<collection_name>.find().pretty()
+
+#Find the first row matching the object
+
+db.<collection_name>.findOne({key: 'value'})
+
+#Search in a MongoDb Database
+
+db.<collection_name>.find({key:'value'})
+
+#Limit the number of rows in output
+>db.comments.find().limit(2)
+
+#Count the number of rows in the output
+
+>db.comments.find().count()
+
+
+# Update the record (Existing one)
+db.employee.updateOne({"name":"kumar"},{$set:{"name":"kumar2"}});
+
+#Update the record (If not existing, create one)
+
+db.employee.updateOne({"name":"kamlesh"},{$set:{"name":"Kamlesh","dept":"IT","salary":10000}},{"upsert":true});
+
+#sort using ASC or DSC orer
+db.<collection_name>.find().sort({"key" : 1}) //for assending order
+db.<collection_name>.find().sort({"key" : -1}) //for desending order
+
+Eg: 
+db.employee.find().sort({"salary":1})
+db.employee.find().sort({"salary":-1})
